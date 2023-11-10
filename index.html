@@ -16,6 +16,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
+    <script>
+        const { Client, Account, ID } = Appwrite;
+
+        const client = new Client();
+
+        const account = new Account(client);
+
+        client
+            .setEndpoint('https://allmarket.space/v1')
+            .setProject('654db14d08942f2a96c1');
+
+    </script>
+
     <script>
         const userId = new URLSearchParams(window.location.search).get("userId");
         const type = new URLSearchParams(window.location.search).get("type");
@@ -37,7 +52,24 @@
         } else {
             appVersion = window.navigator.appVersion
         }
-   
+        function goto() {
+            const promise = account.updateRecovery(
+                userId,
+                secret,
+                document.getElementById('passwd').value,
+                document.getElementById('confirmpasswd').value);
+
+            promise.then(function (response) {
+                alert('updateRecovery OK!');
+                console.log(response); // Success
+            }, function (error) {
+                console.log(error); // Failure
+            });
+
+            window.location
+                .assign('https://andrey253.github.io');
+            return false; //do not submit the form
+        }
     </script>
     <title>Forgot Password UI Using CSS - @code.scientist x @codingtorque</title>
 </head>
@@ -46,15 +78,15 @@
     <div class="card">
         <p class="lock-icon"><i class="fa fa-lock"></i></p>
 
-        <form action=""  method="post" name="signup" id = "forma">
+        <form method="post" name="signup" id="forma" onsubmit="return goto()">
             <input type="text" name="userId" id="userId" hidden='true'>
             <input type="text" name="type" id="type" hidden='true'>
             <input type="text" name="secret" id="secret" hidden='true'>
             <input type="text" name="platform" id="platform">
             <label for="text_field">Восстановить пароль?</label>
-            <input type="text" class="passInput" placeholder="Введите пароль" id="text_field" name="passwd">
-            <input type="text" class="passInput" placeholder="Повторите пароль" id="text_field" name="confirmpasswd">
-            <button  name="type" value="recovery" >Восстановить пароль</button>
+            <input type="text" class="passInput" placeholder="Введите пароль" id="passwd" name="passwd">
+            <input type="text" class="passInput" placeholder="Повторите пароль" id="confirmpasswd" name="confirmpasswd">
+            <button type='submit' name="type" value="recovery">Восстановить пароль</button>
         </form>
     </div>
 
@@ -63,7 +95,7 @@
         document.getElementById('type').value = type
         document.getElementById('secret').value = secret
         document.getElementById('platform').value = appVersion
-        document.getElementById('forma').action = url
+        // document.getElementById('forma').action = url
 
 
     </script>
