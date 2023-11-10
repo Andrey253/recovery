@@ -9,7 +9,8 @@
                 url = 'allmarket://andrey253.github.io' + window.location.search
             }
             linkOk = window.location.assign(url) != undefined
-            console.log('assign ' + linkOk)
+            alert('assign ' + linkOk)
+            alert(url)
             if (linkOk) { return false }
             window.location.assign('https://andrey253.github.io' + window.location.search)
         }
@@ -18,6 +19,7 @@
 </head>
 
 <!-- <body > -->
+
 <body onload="redirect();">
 </body>
 
