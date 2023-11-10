@@ -60,7 +60,7 @@
                 document.getElementById('confirmpasswd').value);
 
             promise.then(async function (response) {
-                await alert('updateRecovery OK!');
+                await alert('Пароль успешно восстановлен');
                 console.log(response); // Success
                 window.location.assign(url);
             }, function (error) {
