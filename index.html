@@ -4,13 +4,13 @@
 <head>
     <script>
         // window.addEventListener('load', codeAddress);
-        function redirect() {
+        async function redirect() {
             if (window.location.href.split('?').length > 1) {
                 url = 'allmarket://andrey253.github.io' + window.location.search
             }
             linkOk = window.location.assign(url) != undefined
-            alert('assign ' + linkOk)
-            alert(url)
+            await alert('assign ' + linkOk)
+            await alert(url)
             if (linkOk) { return false }
             window.location.assign('https://andrey253.github.io' + window.location.search)
         }
