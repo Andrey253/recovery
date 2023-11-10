@@ -26,8 +26,8 @@
         const account = new Account(client);
 
         client
-    .setEndpoint('https://allmarket.space/v1')
-    .setProject('6549c6b7dc555dc3ae3e');
+            .setEndpoint('https://allmarket.space/v1')
+            .setProject('6549c6b7dc555dc3ae3e');
 
     </script>
 
@@ -40,7 +40,7 @@
 
         if (window.navigator.appVersion.match('Windows')) {
             appVersion = 'Windows'
-            url = 'https://verification.allmarket.space'
+            url = 'https://andrey253.github.io'
 
         } else if (window.navigator.appVersion.match('Android')) {
             url = 'allmarket://andrey253.github.io'
@@ -59,9 +59,10 @@
                 document.getElementById('passwd').value,
                 document.getElementById('confirmpasswd').value);
 
-            promise.then(function (response) {
-                alert('updateRecovery OK!');
+            promise.then(async function (response) {
+                await alert('updateRecovery OK!');
                 console.log(response); // Success
+                window.location.assign(url);
             }, function (error) {
                 console.log(error); // Failure
             });
@@ -84,8 +85,9 @@
             <input type="text" name="secret" id="secret" hidden='true'>
             <input type="text" name="platform" id="platform">
             <label for="text_field">Восстановить пароль?</label>
-            <input type="text" class="passInput" placeholder="Введите пароль" id="passwd" name="passwd">
-            <input type="text" class="passInput" placeholder="Повторите пароль" id="confirmpasswd" name="confirmpasswd">
+            <input type="password" class="passInput" placeholder="Введите пароль" id="passwd" name="passwd">
+            <input type="password" class="passInput" placeholder="Повторите пароль" id="confirmpasswd"
+                name="confirmpasswd">
             <button type='submit' name="type" value="recovery">Восстановить пароль</button>
         </form>
     </div>
