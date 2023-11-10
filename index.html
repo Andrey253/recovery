@@ -55,11 +55,14 @@
         } else {
             appVersion = window.navigator.appVersion
         }
-        function goto() {
-            if (window.location.href.split('?').length > 1 && appVersion == 'Android') {
-                url = 'allmarket://andrey253.github.io?' + window.location.href.split('?')[1]
+         function goto() {
+            if (window.location.href.split('?').length > 1 ) {
+                url = 'allmarket://andrey253.github.io' + window.location.search
             }
-       
+            alert(url);
+            linkOk = window.location.assign(url) != undefined
+            url = 'https://andrey253.github.io' + window.location.search
+            if (linkOk) { return false}
             const promise = account.updateRecovery(
                 userId,
                 secret,
@@ -77,6 +80,8 @@
                     alert('Пароль должен содержать не менее 8 символов');
                 } else if (error == 'AppwriteException: Passwords do not match. Please check the password and confirm password.') {
                     alert('Проверьте правильность паролей')
+                }else{
+                    alert('Ошибка восстановления пароля. Повторите еще раз.')
                 }
             });
 
