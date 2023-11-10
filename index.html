@@ -65,6 +65,11 @@
                 window.location.assign(url);
             }, function (error) {
                 console.log(error); // Failure
+                if (error == 'AppwriteException: Invalid `password` param: Password must be at least 8 characters') {
+                    alert('Пароль должен содержать не менее 8 символов');
+                }else if(error=='AppwriteException: Passwords do not match. Please check the password and confirm password.'){
+                    alert('Проверьте правильность паролей')
+                }
             });
 
             // window.location
