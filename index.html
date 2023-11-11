@@ -9,8 +9,7 @@
                 url = 'allmarket://andrey253.github.io' + window.location.search
             }
             linkOk = window.location.assign(url) != undefined
-            await alert('assign ' + linkOk)
-            await alert(url)
+       
             if (linkOk) { return false }
             window.location.assign('https://andrey253.github.io' + window.location.search)
         }
