@@ -76,13 +76,23 @@
                 alert('rec')
             }
             if (type == 'accountverfication') {
-
-                alert('Вери')
+                const promise = account.updateVerification(userId,secret);
+                
+                promise.then(function (response) {
+                    console.log(response); // Success
+                    alert('Емайл упешно подтвержден')
+                    window.location = 'https://andrey253.github.io'
+                }, function (error) {
+                    alert(window.location.host)
+                    console.log(error); // Failure /222222/index_future.html
+                    window.location = 'https://andrey253.github.io'+window.location.pathname.replace('index_future','ready_verifiy')
+                });
+                // alert(window.location)
                 try {
-                    
-                    window.location.assign('https://andrey253.github.io')
+
+                    // window.location.assign('https://andrey253.github.io')
                 } catch (error) {
-                    
+
                 }
             }
         }
@@ -117,7 +127,7 @@
             <input type="text" name="userId" id="userId" hidden='true'>
             <input type="text" name="type" id="type" hidden='true'>
             <input type="text" name="secret" id="secret" hidden='true'>
-            <input name="platform" id="platform" type="button"></input>
+            <h3 id="platform" type="text"></h3>
             <label for="text_field">Восстановить пароль?</label>
             <input type="password" class="passInput" placeholder="Введите пароль" id="passwd" name="passwd">
             <input type="password" class="passInput" placeholder="Повторите пароль" id="confirmpasswd"
@@ -126,15 +136,16 @@
         </form>
     </div>
 
-    <script>
-        document.getElementById('userId').value = userId
-        document.getElementById('type').value = type
-        document.getElementById('secret').value = secret
-        document.getElementById('platform').value = appVersion
-        // document.getElementById('forma').action = url
+    <body>
+        <script>
+            document.getElementById('userId').value = userId
+            document.getElementById('type').value = type
+            document.getElementById('secret').value = secret
+            document.getElementById('platform').innerHTML = appVersion
+            // document.getElementById('forma').action = url    </script>
+    </body>script>
 
-
-    </script>
+    </div>
 </body>
 
 </html>
