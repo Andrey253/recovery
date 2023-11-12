@@ -83,9 +83,9 @@
                     alert('Емайл упешно подтвержден')
                     window.location = 'https://andrey253.github.io'
                 }, function (error) {
-                    alert(window.location.host)
+                    alert(window.location.host+window.location.pathname.replace('index_future','ready_verifiy'))
                     console.log(error); // Failure /222222/index_future.html
-                    window.location = 'https://andrey253.github.io'+window.location.pathname.replace('index_future','ready_verifiy')
+                    window.location.assign('http://'+window.location.host+window.location.pathname.replace('index_future','ready_verifiy'))
                 });
                 // alert(window.location)
                 try {
