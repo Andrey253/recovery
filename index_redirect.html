@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script>
+        // window.addEventListener('load', codeAddress);
+        async function redirect() {
+            if (window.location.href.split('?').length > 1) {
+                url = 'allmarket://andrey253.github.io' + window.location.search
+            }
+            linkOk = window.location.assign(url) != undefined
+       
+            if (linkOk) { return false }
+            window.location.assign('https://andrey253.github.io' + window.location.search)
+        }
+    </script>
+    <title>Forgot Password</title>
+</head>
+
+<!-- <body > -->
+
+<body onload="redirect();">
+</body>
+
+</html>
