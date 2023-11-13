@@ -42,7 +42,7 @@
             try {
 
                 const promise = await account.updateVerification(userId, secret);
-                console.log(response); // Success
+                console.log(promise); // Success
                 document.getElementById('label').innerHTML = 'Верификация прошла успешно'
                 await sleep(2000)
                 window.location = 'https://andrey253.github.io'
