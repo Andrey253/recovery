@@ -39,17 +39,17 @@
                 promise.then(async function (response) {
                     console.log(response); // Success
                     document.getElementById('label').innerHTML = 'Верификация прошла успешно'
-                    sleep(2000)
+                await    sleep(2000)
                     window.location = 'https://andrey253.github.io'
                 },async function (error) {
                     document.getElementById('label').innerHTML = '.'
-                    sleep(200)
+                    await    sleep(200)
                     document.getElementById('label').innerHTML = '..'
-                    sleep(200)
+                    await    sleep(200)
                     document.getElementById('label').innerHTML = '...'
-                    sleep(200)
+                    await    sleep(200)
                     document.getElementById('label').innerHTML = '....'
-                    sleep(2000)
+                    await   sleep(2000)
                     document.getElementById('label').innerHTML = 'Ошибка верификации'
                     console.log(error); // Failure /222222/index_future.html
                 });
