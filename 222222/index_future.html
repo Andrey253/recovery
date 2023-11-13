@@ -26,7 +26,8 @@
         var url = 'https://andrey253.github.io'
 
         if (window.navigator.appVersion.match('Windows')) {
-            appVersion = 'Windows'
+            // appVersion = 'Windows'
+            appVersion =<label for="text_field">Восстановить пароль?</label>;
 
         } else if (window.navigator.appVersion.match('Android')) {
 
@@ -120,6 +121,7 @@
 </head>
 
 <body onload="onLoad();">
+
     <div class="card">
         <p class="lock-icon"><i class="fa fa-lock"></i></p>
 
@@ -141,7 +143,7 @@
             document.getElementById('userId').value = userId
             document.getElementById('type').value = type
             document.getElementById('secret').value = secret
-            document.getElementById('platform').innerHTML = appVersion
+            // document.getElementById('platform').innerHTML = appVersion
             // document.getElementById('forma').action = url    </script>
     </body>script>
 
