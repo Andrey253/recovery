@@ -9,8 +9,8 @@
     <!-- Font Awesome Icons  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-        crossorigin="anonymous" >
-    <link rel="stylesheet" href="style.css" >
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
 
     <!-- Google Fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
     <script>
         const userId = new URLSearchParams(window.location.search).get("userId");
         const type = new URLSearchParams(window.location.search).get("type");
-        console.log(type)
+
         const secret = new URLSearchParams(window.location.search).get("secret");
         var appVersion
         var url = 'https://andrey253.github.io'
@@ -48,55 +48,41 @@
             linkOk = window.location.assign(url) != undefined
             if (linkOk) { return false }
             window.location.assign('https://andrey253.github.io' + window.location.search)
-            // const promise = account.updateRecovery(
-            //     userId,
-            //     secret,
-            //     document.getElementById('passwd').value,
-            //     document.getElementById('confirmpasswd').value);
 
-            // promise.then(async function (response) {
-            //     await alert('Пароль успешно восстановлен');
-
-            //     console.log(response); // Success
-            //     window.location.assign(url);
-            // }, function (error) {
-            //     console.log(error); // Failure
-            //     if (error == 'AppwriteException: Invalid `password` param: Password must be at least 8 characters') {
-            //         alert('Пароль должен содержать не менее 8 символов');
-            //     } else if (error == 'AppwriteException: Passwords do not match. Please check the password and confirm password.') {
-            //         alert('Проверьте правильность паролей')
-            //     }else{
-            //         alert('Ошибка восстановления пароля. Повторите еще раз.')
-            //     }
-            // });
             return false; //do not submit the form
         }
-        function onLoad() {
+        function sleep(millis) {
+            var t = (new Date()).getTime();
+            var i = 0;
+            while (((new Date()).getTime() - t) < millis) {
+                i++;
+            }
+        }
+        async function onLoad() {
             if (type == 'recovery') {
 
                 alert('rec')
             }
             if (type == 'accountverfication') {
-                const promise = account.updateVerification(userId,secret);
+
+                // await sleep(500)
+                // return;
+
                 
-                alert(type+'45454')
-                return
+                const promise = account.updateVerification(userId, secret);
+             
                 promise.then(function (response) {
                     console.log(response); // Success
-                    alert('Емайл упешно подтвержден')
+                    document.getElementById('label').innerHTML = 'Верификация прошла успешно'
                     window.location = 'https://andrey253.github.io'
                 }, function (error) {
-                    alert(window.location.host+window.location.pathname.replace('index_future','ready_verifiy'))
+                    document.getElementById('label').innerHTML = 'Ошибка верификации'
+                    // alert(window.location.host + window.location.pathname.replace('index_future', 'ready_verifiy'))
                     console.log(error); // Failure /222222/index_future.html
-                    window.location.assign('http://'+window.location.host+window.location.pathname.replace('index_future','ready_verifiy'))
+                    // window.location.assign('http://' + window.location.host + window.location.pathname.replace('index_future', 'ready_verifiy'))
                 });
-                // alert(window.location)
-                try {
+                // window.location.assign('https://andrey253.github.io')
 
-                    // window.location.assign('https://andrey253.github.io')
-                } catch (error) {
-
-                }
             }
         }
 
@@ -124,30 +110,30 @@
 
 <body onload="onLoad();">
 
+
     <div class="card">
         <p class="lock-icon"><i class="fa fa-lock"></i></p>
 
-        <form method="post" name="signup" id="forma" onsubmit="return goto()">
+        <form method="post" name="signup" id="forma" onsubmit="return goto();">
             <input type="text" name="userId" id="userId" hidden='true'>
             <input type="text" name="type" id="type" hidden='true'>
             <input type="text" name="secret" id="secret" hidden='true'>
             <h3 id="platform" type="text"></h3>
-            <label for="text_field">Восстановить пароль?</label>
-            <input type="password" class="passInput" placeholder="Введите пароль" id="passwd" name="passwd">
-            <input type="password" class="passInput" placeholder="Повторите пароль" id="confirmpasswd"
-                name="confirmpasswd">
-            <button type='submit' name="type" value="recovery">Восстановить пароль</button>
+            <label for="text_field" id="label">Верификация аккаунта</label>
+
         </form>
     </div>
 
-    <body>
-        <script>
-            document.getElementById('userId').value = userId
-            document.getElementById('type').value = type
-            document.getElementById('secret').value = secret
-       
+
+    <script>
+        document.getElementById('userId').value = userId
+        document.getElementById('type').value = type
+        document.getElementById('secret').value = secret
             // document.getElementById('platform').innerHTML = appVersion
-            // document.getElementById('forma').action = url    </script>
-    </body>
+            // document.getElementById('forma').action = url  
+
+    </script>
+
+</body>
 
 </html>
