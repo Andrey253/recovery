@@ -41,7 +41,7 @@
                     document.getElementById('label').innerHTML = 'Верификация прошла успешно'
                     sleep(2000)
                     window.location = 'https://andrey253.github.io'
-                }, function (error) {
+                },async function (error) {
                     document.getElementById('label').innerHTML = '.'
                     sleep(200)
                     document.getElementById('label').innerHTML = '..'
