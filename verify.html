@@ -38,25 +38,22 @@
                 i++;
             }
         }
-       async  function onLoad() {
+        async function onLoad() {
             try {
 
                 const promise = await account.updateVerification(userId, secret);
                 console.log(promise); // Success
                 document.getElementById('label').innerHTML = 'Верификация прошла успешно'
-                 sleep(2000)
-                window.location = 'https://andrey253.github.io'
-            } catch (error) {
+                setTimeout(() => { window.location = 'https://andrey253.github.io'; }, 2000);
 
-                document.getElementById('label').innerHTML = '1'
-                 sleep(200)
-                document.getElementById('label').innerHTML = '2'
-                 sleep(200)
-                document.getElementById('label').innerHTML = '...'
-                 sleep(200)
-                document.getElementById('label').innerHTML = '....'
-                 sleep(2000)
-                document.getElementById('label').innerHTML = 'Ошибка верификации'
+            } catch (error) {
+                var doc = document.getElementById('label')
+                setTimeout(() => { doc.innerHTML = '.'; }, 200);
+                setTimeout(() => { doc.innerHTML = '..'; }, 200);
+                setTimeout(() => { doc.innerHTML = '...'; }, 200);
+                setTimeout(() => { doc.innerHTML = '....'; }, 200);
+                setTimeout(() => { doc.innerHTML = 'Ошибка верификации'; }, 200);
+
                 console.log(error); // Failure /222222/index_future.html
                 return false
             }
