@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome Icons  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
+    <script>
+        const userId = new URLSearchParams(window.location.search).get("userId");
+        const secret = new URLSearchParams(window.location.search).get("secret");
+        const { Client, Account, ID } = Appwrite;
+
+        const client = new Client();
+
+        const account = new Account(client);
+
+        client
+            .setEndpoint('https://allmarket.space/v1')
+            .setProject('6549c6b7dc555dc3ae3e'); appVersion = window.navigator.appVersion
+            var label = document.getElementById('label')
+            var button = document.getElementById('button')
+            function recovery() {
+                const promise = account.updateRecovery(
+                    userId,
+                    secret,
+                    document.getElementById('passwd').value,
+                    document.getElementById('confirmpasswd').value);
+                    
+                    promise.then(async function (response) {
+                        
+                       label.innerHTML = 'Пароль успешно восстановлен'
+                       button.innerHTML = 'На сайт'
+                       button.onclick = window.location.assign('https://andrey253.github.io')
+
+                console.log(response); // Success
+              
+            }, function (error) {
+                button.onclick = window.location.assign('https://andrey253.github.io')
+                console.log(error); // Failure
+                if (error == 'AppwriteException: Invalid `password` param: Password must be at least 8 characters') {
+                    alert('Пароль должен содержать не менее 8 символов');
+                } else if (error == 'AppwriteException: Passwords do not match. Please check the password and confirm password.') {
+                    alert('Проверьте правильность паролей')
+                }else{
+                    alert('Ошибка восстановления пароля. Повторите еще раз.')
+                }
+            });
+            return false; //do not submit the form
+        }
+ 
+
+ 
+    </script>
+    <title>Восстановление пароля</title>
+</head>
+
+<body>
+
+    <div class="card">
+        <p class="lock-icon"><i class="fa fa-lock"></i></p>
+
+        <form method="post" name="signup" id="forma" onsubmit="return recovery()">
+            <input type="text" name="userId" id="userId" hidden='true'>
+            <input type="text" name="type" id="type" hidden='true'>
+            <input type="text" name="secret" id="secret" hidden='true'>
+            <h3 id="platform" type="text"></h3>
+            <label for="text_field">Восстановить пароль?</label>
+            <input type="password" class="passInput" placeholder="Введите пароль" id="passwd" name="passwd">
+            <input type="password" class="passInput" placeholder="Повторите пароль" id="confirmpasswd"
+                name="confirmpasswd">
+            <button type='submit' name="type" id="button">Восстановить пароль</button>
+        </form>
+    </div>
+
+    <body>
+        <script>
+            document.getElementById('userId').value = userId
+            document.getElementById('type').value = type
+            document.getElementById('secret').value = secret
+
+            // document.getElementById('platform').innerHTML = appVersion
+            // document.getElementById('forma').action = url    </script>
+    </body>
+
+</html>
