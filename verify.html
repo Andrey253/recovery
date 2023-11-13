@@ -49,10 +49,10 @@
             } catch (error) {
                 var doc = document.getElementById('label')
                 setTimeout(() => { doc.innerHTML = '.'; }, 200);
-                setTimeout(() => { doc.innerHTML = '..'; }, 200);
-                setTimeout(() => { doc.innerHTML = '...'; }, 200);
-                setTimeout(() => { doc.innerHTML = '....'; }, 200);
-                setTimeout(() => { doc.innerHTML = 'Ошибка верификации'; }, 200);
+                setTimeout(() => { doc.innerHTML = '..'; }, 400);
+                setTimeout(() => { doc.innerHTML = '...'; }, 600);
+                setTimeout(() => { doc.innerHTML = '....'; }, 800);
+                setTimeout(() => { doc.innerHTML = 'Ошибка верификации'; }, 2000);
 
                 console.log(error); // Failure /222222/index_future.html
                 return false
