@@ -42,10 +42,16 @@
                     sleep(2000)
                     window.location = 'https://andrey253.github.io'
                 }, function (error) {
+                    document.getElementById('label').innerHTML = '.'
+                    sleep(200)
+                    document.getElementById('label').innerHTML = '..'
+                    sleep(200)
+                    document.getElementById('label').innerHTML = '...'
+                    sleep(200)
+                    document.getElementById('label').innerHTML = '....'
+                    sleep(2000)
                     document.getElementById('label').innerHTML = 'Ошибка верификации'
-                    // alert(window.location.host + window.location.pathname.replace('index_future', 'ready_verifiy'))
                     console.log(error); // Failure /222222/index_future.html
-                    // window.location.assign('http://' + window.location.host + window.location.pathname.replace('index_future', 'ready_verifiy'))
                 });
                 // window.location.assign('https://andrey253.github.io')
 
