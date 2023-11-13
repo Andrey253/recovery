@@ -20,37 +20,11 @@
     <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
     <script>
         const userId = new URLSearchParams(window.location.search).get("userId");
-        const type = new URLSearchParams(window.location.search).get("type");
-
         const secret = new URLSearchParams(window.location.search).get("secret");
-        var appVersion
+     
         var url = 'https://andrey253.github.io'
 
-        if (window.navigator.appVersion.match('Windows')) {
-            appVersion = 'Windows'
-
-        } else if (window.navigator.appVersion.match('Android')) {
-
-            url = 'allmarket://andrey253.github.io'
-
-            appVersion = 'Android'
-
-        } else if (window.navigator.appVersion.match('iPhone')) {
-            appVersion = 'iPhone'
-
-        } else {
-            appVersion = window.navigator.appVersion
-        }
-        function goto() {
-            if (window.location.href.split('?').length > 1) {
-                url = 'allmarket://andrey253.github.io' + window.location.search
-            }
-            linkOk = window.location.assign(url) != undefined
-            if (linkOk) { return false }
-            window.location.assign('https://andrey253.github.io' + window.location.search)
-
-            return false; //do not submit the form
-        }
+   
         function sleep(millis) {
             var t = (new Date()).getTime();
             var i = 0;
@@ -59,21 +33,13 @@
             }
         }
         async function onLoad() {
-            if (type == 'recovery') {
-
-                alert('rec')
-            }
-            if (type == 'accountverfication') {
-
-                // await sleep(500)
-                // return;
-
-                
+                         
                 const promise = account.updateVerification(userId, secret);
              
-                promise.then(function (response) {
+                promise.then(async function (response) {
                     console.log(response); // Success
                     document.getElementById('label').innerHTML = 'Верификация прошла успешно'
+                    sleep(2000)
                     window.location = 'https://andrey253.github.io'
                 }, function (error) {
                     document.getElementById('label').innerHTML = 'Ошибка верификации'
@@ -83,7 +49,7 @@
                 });
                 // window.location.assign('https://andrey253.github.io')
 
-            }
+            
         }
 
         function redirect() {
@@ -123,17 +89,6 @@
 
         </form>
     </div>
-
-
-    <script>
-        document.getElementById('userId').value = userId
-        document.getElementById('type').value = type
-        document.getElementById('secret').value = secret
-            // document.getElementById('platform').innerHTML = appVersion
-            // document.getElementById('forma').action = url  
-
-    </script>
-
 </body>
 
 </html>

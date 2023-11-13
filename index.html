@@ -6,22 +6,20 @@
         // window.addEventListener('load', redirect);''
         const type = new URLSearchParams(window.location.search).get("type");
         function redirect() {
-            
-            var linkOk = window.location.assign(window.location.href.replace('https','almarket')) != undefined
+
+            var linkOk = window.location.assign(window.location.href.replace('https', 'almarket')) != undefined
             if (linkOk) { return false }
             // alert('href ' + window.location.href)
             // alert('host ' + window.location.host)
             if (type == 'accountverfication') {
                 var url = window.location.href.replace('recovery/', 'recovery/verify.html');
-                alert('url ' + url)
-                // url = 'https://andrey253.github.io/recovery/verify.html' + window.location.search
-
-                window.location.assign(url)
             }
-
-            if (window.location.href.split('?').length > 1) {
-                url = 'allmarket://andrey253.github.io/recovery/verify.html' + window.location.search
+            if (type == 'recovery') {
+                var url = window.location.href.replace('recovery/', 'recovery/recovery.html');
             }
+            
+            window.location.assign(url)
+
 
 
         }
