@@ -44,7 +44,7 @@
                 const promise = await account.updateVerification(userId, secret);
                 console.log(promise); // Success
                 document.getElementById('label').innerHTML = 'Верификация прошла успешно'
-                setTimeout(() => { window.location = 'https://andrey253.github.io'; }, 2000);
+                setTimeout(() => { window.location = 'https://andrey253.github.io'; }, 4000);
 
             } catch (error) {
                 var doc = document.getElementById('label')
