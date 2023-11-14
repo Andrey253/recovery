@@ -19,6 +19,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
     <script>
+        function redirect() { window.location.assign('https://andrey253.github.io') }
         const userId = new URLSearchParams(window.location.search).get("userId");
         const secret = new URLSearchParams(window.location.search).get("secret");
         const { Client, Account, ID } = Appwrite;
@@ -29,40 +30,54 @@
 
         client
             .setEndpoint('https://allmarket.space/v1')
-            .setProject('6549c6b7dc555dc3ae3e'); appVersion = window.navigator.appVersion
-            var label = document.getElementById('label')
-            var button = document.getElementById('button')
-            function recovery() {
-                const promise = account.updateRecovery(
-                    userId,
-                    secret,
-                    document.getElementById('passwd').value,
-                    document.getElementById('confirmpasswd').value);
-                    
-                    promise.then(async function (response) {
-                        
-                       label.innerHTML = 'Пароль успешно восстановлен'
-                       button.innerHTML = 'На сайт'
-                       button.onclick = window.location.assign('https://andrey253.github.io')
+            .setProject('6549c6b7dc555dc3ae3e');
+        const label = document.getElementById('label')
+        const buttonRedirect = document.getElementById('buttonRedirect')
+        function recovery() {
+
+            const promise = account.updateRecovery(
+                userId,
+                secret,
+                document.getElementById('passwd').value,
+                document.getElementById('confirmpasswd').value);
+
+            promise.then(async function (response) {
+
+                document.getElementById('buttonRedirect').onclick = redirect
+                document.getElementById('label').innerHTML = 'Пароль успешно восстановлен'
+                document.getElementById('buttonRedirect').innerHTML = 'перейти на сайт'
+                document.getElementById('passwd').hidden = true
+                document.getElementById('confirmpasswd').hidden = true
 
                 console.log(response); // Success
-              
+
             }, function (error) {
-                button.onclick = window.location.assign('https://andrey253.github.io')
+                try {
+
+                    // buttonRedirect.hidden ="true"
+                } catch (error) {
+                    alert(error)
+                }
                 console.log(error); // Failure
                 if (error == 'AppwriteException: Invalid `password` param: Password must be at least 8 characters') {
                     alert('Пароль должен содержать не менее 8 символов');
                 } else if (error == 'AppwriteException: Passwords do not match. Please check the password and confirm password.') {
                     alert('Проверьте правильность паролей')
-                }else{
-                    alert('Ошибка восстановления пароля. Повторите еще раз.')
+                } else if (error == 'AppwriteException: Invalid token passed in the request.') {
+                    document.getElementById('label').innerHTML = 'Устаревшая ссылка'
+                    document.getElementById('passwd').hidden = true
+                    document.getElementById('confirmpasswd').hidden = true
+                    document.getElementById('buttonRedirect').innerHTML = 'Перейти на сайт'
+                    document.getElementById('buttonRedirect').onclick = redirect
+                } else {
+                    alert('Ошибка восстановления пароля. Повторите еще раз.' + error)
                 }
             });
             return false; //do not submit the form
         }
- 
 
- 
+
+
     </script>
     <title>Восстановление пароля</title>
 </head>
@@ -77,22 +92,21 @@
             <input type="text" name="type" id="type" hidden='true'>
             <input type="text" name="secret" id="secret" hidden='true'>
             <h3 id="platform" type="text"></h3>
-            <label for="text_field">Восстановить пароль?</label>
-            <input type="password" class="passInput" placeholder="Введите пароль" id="passwd" name="passwd">
-            <input type="password" class="passInput" placeholder="Повторите пароль" id="confirmpasswd"
+            <label for="text_field" id="label">Восстановить пароль?</label>
+            <input type="password" class="passInput" placeholder="Введите пароль" id="passwd" name="passwd"
+                value="11111111">
+            <input type="password" class="passInput" placeholder="Повторите пароль" id="confirmpasswd" value="11111111"
                 name="confirmpasswd">
-            <button type='submit' name="type" id="button">Восстановить пароль</button>
+            <button type='submit' name="type" id="buttonRedirect">Восстановить пароль</button>
         </form>
     </div>
 
-    <body>
-        <script>
-            document.getElementById('userId').value = userId
-            document.getElementById('type').value = type
-            document.getElementById('secret').value = secret
+    <script>
+        document.getElementById('userId').value = userId
+        document.getElementById('type').value = type
+        document.getElementById('secret').value = secret
 
-            // document.getElementById('platform').innerHTML = appVersion
-            // document.getElementById('forma').action = url    </script>
-    </body>
+    </script>
+</body>
 
 </html>
